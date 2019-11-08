@@ -5,7 +5,7 @@
  */
 package View;
 
-
+//import Model.Funcionario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -51,7 +51,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -208,7 +208,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.add(jTabbedPane1, java.awt.BorderLayout.PAGE_START);
 
-        getContentPane().add(jPanel1);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 563));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -220,27 +220,27 @@ public class Principal extends javax.swing.JFrame {
     
     void carregarTabela(){
     
-    
+   /* List<Funcionario> funcionarios = new ArrayList(); 
  
-   /* for (int i = 0; i < funcionarios.size(); i++) {
+    for (int i = 0; i < funcionarios.size(); i++) {
        
         tbCliente.setValueAt(funcionarios.get(i).getId(), i, 0);
         tbCliente.setValueAt(funcionarios.get(i).getNome(), i, 1);
         tbCliente.setValueAt(funcionarios.get(i).getContacto(), i, 2);
         tbCliente.setValueAt(funcionarios.get(i).getCategoria(), i, 3);
        
-       }*/
-
+       }
+*/
 }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       // JOptionPane.showMessageDialog(null, "SALVO!");
+        JOptionPane.showMessageDialog(null, "SALVO!");
         
 //         carregarTabela();
 //        AllSave<Funcionario> a = new AllSave();
         
        
-      //  Funcionario f = new Funcionario(tfNome.getText(),tfContacto.getText(),Integer.parseInt(tfCategoria.getText()));
+        //Funcionario f = new Funcionario(tfNome.getText(),tfContacto.getText(),Integer.parseInt(tfCategoria.getText()));
 //        a.salvar(f);
          JOptionPane.showMessageDialog(null, "SALVO!");
         
