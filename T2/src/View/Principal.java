@@ -5,9 +5,12 @@
  */
 package View;
 
-//import Model.Funcionario;
-import java.util.ArrayList;
-import java.util.List;
+import Controller.ProdutoCrud;
+import Model.Estagiario;
+import Model.Produto;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -35,228 +39,323 @@ public class Principal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        tfNome = new javax.swing.JTextField();
-        tfContacto = new javax.swing.JTextField();
-        tfCategoria = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tfNome = new javax.swing.JTextField();
+        tfContacto = new javax.swing.JTextField();
+        cbFormacao = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbCliente = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        tbProdutos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        btApagar = new javax.swing.JButton();
+        btActualizar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        cbDepartamento = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        tfApelido = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        tfAano = new javax.swing.JTextField();
+        cbDia = new javax.swing.JComboBox<>();
+        cbMes = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jPanel3.setBackground(new java.awt.Color(126, 42, 48));
-        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setBackground(new java.awt.Color(88, 3, 42));
 
+        jPanel4.setBackground(new java.awt.Color(87, 21, 25));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Nome:");
+        jLabel1.setText("Nomes:");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Contacto");
+        jLabel2.setText("Formação:");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 51, -1, 31));
 
+        jLabel3.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Categoria");
+        jLabel3.setText("contacto");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        jPanel4.add(tfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 242, 30));
+        jPanel4.add(tfContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 242, 30));
 
-        jButton1.setBackground(new java.awt.Color(66, 25, 36));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        cbFormacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Adicionar" }));
+        cbFormacao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cbFormacaoFocusGained(evt);
+            }
+        });
+        cbFormacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFormacaoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cbFormacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 54, 242, 31));
+
+        tbProdutos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Estagiario", "Formação", "Departamento"
+            }
+        ));
+        jScrollPane1.setViewportView(tbProdutos);
+
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 388, 1080, 150));
+
         jButton1.setText("Salvar");
-        jButton1.setOpaque(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 210, 90, -1));
 
-        jButton2.setBackground(new java.awt.Color(66, 25, 36));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Eliminar");
-        jButton2.setOpaque(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btApagar.setText("Apagar");
+        btApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btApagarActionPerformed(evt);
             }
         });
+        jPanel4.add(btApagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 290, 90, -1));
 
-        tbCliente.setForeground(new java.awt.Color(255, 255, 255));
-        tbCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nome", "Contacto", "Categoria"
+        btActualizar.setText("Actualizar");
+        jPanel4.add(btActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 250, 90, -1));
+
+        jLabel6.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Departamento:");
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 54, 140, 20));
+
+        cbDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Novo+","Tecnologias","estatistica" }));
+        jPanel4.add(cbDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 50, 160, 30));
+
+        jLabel4.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Apelido:");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 214, 90, 20));
+        jPanel4.add(tfApelido, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, 230, 30));
+
+        jLabel7.setFont(new java.awt.Font("MingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Nascimento:");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 160, 20));
+
+        tfAano.setText("Ano");
+        tfAano.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfAanoFocusGained(evt);
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfAanoFocusLost(evt);
             }
         });
-        tbCliente.setRowHeight(20);
-        jScrollPane1.setViewportView(tbCliente);
+        jPanel4.add(tfAano, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 250, 50, 30));
 
-        jButton3.setBackground(new java.awt.Color(66, 25, 36));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Actualizar");
-        jButton3.setOpaque(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        cbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
+        cbDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                cbDiaActionPerformed(evt);
             }
         });
+        jPanel4.add(cbDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 250, 50, 30));
+
+        cbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4","5","6","7","8","9","10","11","12"}));
+        cbMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMesActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 250, 50, 30));
+
+        jTabbedPane2.addTab("Estasgiarios", jPanel4);
+
+        jTabbedPane1.addTab("Registos", jTabbedPane2);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton2)
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfContacto, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                            .addComponent(tfCategoria, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfNome))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))))
+            .addGap(0, 1145, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 323, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap())
+            .addGap(0, 602, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Protos", jPanel3);
+        jTabbedPane1.addTab("Other1", jPanel3);
 
-        jTabbedPane1.addTab("Registos", jTabbedPane2);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1041, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1145, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 563, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 602, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Whatever", jPanel4);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1041, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 563, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Whatever", jPanel5);
+        jTabbedPane1.addTab("Other1", jPanel2);
 
         jPanel1.add(jTabbedPane1, java.awt.BorderLayout.PAGE_START);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 563));
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void cbMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_cbMesActionPerformed
 
-    
-    void carregarTabela(){
-    
-   /* List<Funcionario> funcionarios = new ArrayList(); 
- 
-    for (int i = 0; i < funcionarios.size(); i++) {
-       
-        tbCliente.setValueAt(funcionarios.get(i).getId(), i, 0);
-        tbCliente.setValueAt(funcionarios.get(i).getNome(), i, 1);
-        tbCliente.setValueAt(funcionarios.get(i).getContacto(), i, 2);
-        tbCliente.setValueAt(funcionarios.get(i).getCategoria(), i, 3);
-       
-       }
-*/
-}
+    private void cbDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbDiaActionPerformed
+
+    private void tfAanoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfAanoFocusLost
+        // TODO add your handling code here:
+        if (tfAano.getText()==""){
+            tfAano.setText("Ano");
+        }
+    }//GEN-LAST:event_tfAanoFocusLost
+
+    private void tfAanoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfAanoFocusGained
+        // TODO add your handling code here:
+        tfAano.setText("");
+    }//GEN-LAST:event_tfAanoFocusGained
+
+    private void btApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btApagarActionPerformed
+        // TODO add your handling code here:
+
+        tbProdutos.remove(tbProdutos.getSelectedRow());
+    }//GEN-LAST:event_btApagarActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "SALVO!");
+        String  data1 = tfAano.getText()+"-"+cbMes.getSelectedItem()+"-"+cbDia.getSelectedItem();
+        Date data=Date.valueOf(LocalDate.MIN);
+        SimpleDateFormat f = new SimpleDateFormat("y-M-dd");
+        String a= f.format(data.getDate());
+         Estagiario e  = new Estagiario(tfApelido.getText(),tfNome.getText(),tfContacto.getText(),data1,"Activo",String.valueOf(cbFormacao.getSelectedIndex()),String.valueOf(cbDepartamento.getSelectedIndex()));
+         
+        ProdutoCrud pc = new ProdutoCrud();
+        //Produto p = new Produto(cbCategoria.getSelectedIndex(),tfNome.getText(),Float.parseFloat(tfContacto.getText()),Integer.parseInt(tfQuantidade.getText()),a,"");
+        pc.gravarProduto(e);
         
-//         carregarTabela();
-//        AllSave<Funcionario> a = new AllSave();
-        
-       
-        //Funcionario f = new Funcionario(tfNome.getText(),tfContacto.getText(),Integer.parseInt(tfCategoria.getText()));
-//        a.salvar(f);
-         JOptionPane.showMessageDialog(null, "SALVO!");
-        
-       
-       
+        carregarTabelaComTodosDadosDaBase();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cbFormacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFormacaoActionPerformed
+        if (cbFormacao.getSelectedIndex()==0){
+            Novo n = new Novo();
+            n.setVisible(true);
+
+        }
+    }//GEN-LAST:event_cbFormacaoActionPerformed
+
+    private void cbFormacaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbFormacaoFocusGained
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "SALVO!");
-    }//GEN-LAST:event_jButton2ActionPerformed
+        carregarCombo();
+    }//GEN-LAST:event_cbFormacaoFocusGained
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+       
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -279,7 +378,6 @@ public class Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -288,29 +386,83 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+     void carregarCombo(){
+    
+       ProdutoCrud pc = new ProdutoCrud();
+        for (int i = 0; i < pc.lerCategoriasParaCombo().size(); i++) {
+          cbFormacao.addItem(pc.lerCategoriasParaCombo().get(i));
+          
+            //System.out.println(pc.lerCategoriasParaCombo().get(i));
+        }
+    }
+     
+     
+     
+     
+     void carregarTabelaComTodosDadosDaBase(){
+     ProdutoCrud pc = new ProdutoCrud();
+     Estagiario e  = new Estagiario();
+     
+      
+        for (int i = 0; i < pc.lerProdutos().size(); i++) {
+         tbProdutos.setValueAt(pc.lerProdutos().get(i).getNomes(),i,0);
+         tbProdutos.setValueAt(pc.lerProdutos().get(i).getFormacao(), i, 1);
+         tbProdutos.setValueAt(pc.lerProdutos().get(i).getDepartamento(), i, 2);
+         
+        }
+        
+     
+     
+     
+     
+     }
+     
+     
+     
+    /* void carregarTabelaComProdDumaCategoria(){
+     
+      // TODO add your handling code here:
+        Produto p = new Produto();
+        ProdutoCrud pc = new ProdutoCrud();
+        //tbProdutos.removeAll();
+        for (int i = 0; i < pc.lerProdutos().size(); i++) {
+         tbProdutos.setValueAt(pc.lerProdutosPorCategoria(cbFormacao.getSelectedIndex()).get(i).getNome(), i, 0);
+         tbProdutos.setValueAt(pc.lerProdutosPorCategoria(cbFormacao.getSelectedIndex()).get(i).getPreco(), i, 1);
+         tbProdutos.setValueAt(pc.lerProdutos().get(cbFormacao.getSelectedIndex()).getQuantidade(), i, 2);
+         tbProdutos.setValueAt(pc.lerProdutosPorCategoria(cbFormacao.getSelectedIndex()).get(i).getPrazo(), i, 3);
+         tbProdutos.setValueAt(pc.lerProdutosPorCategoria(cbFormacao.getSelectedIndex()).get(i).getCategoria(), i,4 );
+         tbProdutos.setValueAt(pc.lerProdutosPorCategoria(cbFormacao.getSelectedIndex()).get(i).getFornecedor(), i, 5);
+        }
+       
+     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btActualizar;
+    private javax.swing.JButton btApagar;
+    private javax.swing.JComboBox<String> cbDepartamento;
+    private javax.swing.JComboBox<String> cbDia;
+    private javax.swing.JComboBox<String> cbFormacao;
+    private javax.swing.JComboBox<String> cbMes;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable tbCliente;
-    private javax.swing.JTextField tfCategoria;
+    private javax.swing.JTable tbProdutos;
+    private javax.swing.JTextField tfAano;
+    private javax.swing.JTextField tfApelido;
     private javax.swing.JTextField tfContacto;
     private javax.swing.JTextField tfNome;
     // End of variables declaration//GEN-END:variables
-
-
-
-
-
 }
