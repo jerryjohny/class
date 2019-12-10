@@ -11,6 +11,7 @@ import Model.Produto;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -59,6 +61,11 @@ public class Principal extends javax.swing.JFrame {
         tfAano = new javax.swing.JTextField();
         cbDia = new javax.swing.JComboBox<>();
         cbMes = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
 
@@ -87,7 +94,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel3.setText("contacto");
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
         jPanel4.add(tfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 242, 30));
-        jPanel4.add(tfContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 242, 30));
+        jPanel4.add(tfContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 242, 30));
 
         cbFormacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Adicionar" }));
         cbFormacao.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -207,7 +214,7 @@ public class Principal extends javax.swing.JFrame {
                 btApagarActionPerformed(evt);
             }
         });
-        jPanel4.add(btApagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 290, 90, -1));
+        jPanel4.add(btApagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 290, 90, -1));
 
         btActualizar.setText("Actualizar");
         jPanel4.add(btActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 250, 90, -1));
@@ -257,6 +264,32 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel4.add(cbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 250, 50, 30));
+
+        jLabel5.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("jLabel5");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 70, -1));
+
+        jLabel8.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("jLabel8");
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 130, -1));
+
+        jTextField1.setText("jTextField1");
+        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 240, 30));
+
+        jTextField2.setText("jTextField2");
+        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 240, 30));
+
+        jButton2.setBackground(new java.awt.Color(87, 21, 25));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("sair");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 550, 90, 20));
 
         jTabbedPane2.addTab("Estasgiarios", jPanel4);
 
@@ -318,22 +351,19 @@ public class Principal extends javax.swing.JFrame {
     private void btApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btApagarActionPerformed
         // TODO add your handling code here:
 
-        tbProdutos.remove(tbProdutos.getSelectedRow());
+    
     }//GEN-LAST:event_btApagarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String  data1 = tfAano.getText()+"-"+cbMes.getSelectedItem()+"-"+cbDia.getSelectedItem();
-        Date data=Date.valueOf(LocalDate.MIN);
-        SimpleDateFormat f = new SimpleDateFormat("y-M-dd");
-        String a= f.format(data.getDate());
-         Estagiario e  = new Estagiario(tfApelido.getText(),tfNome.getText(),tfContacto.getText(),data1,"Activo",String.valueOf(cbFormacao.getSelectedIndex()),String.valueOf(cbDepartamento.getSelectedIndex()));
+       
+        // Estagiario e  = new Estagiario(tfApelido.getText(),tfNome.getText(),tfContacto.getText(),data1,"Activo",String.valueOf(cbFormacao.getSelectedIndex()),String.valueOf(cbDepartamento.getSelectedIndex()));
          
-        ProdutoCrud pc = new ProdutoCrud();
+   
         //Produto p = new Produto(cbCategoria.getSelectedIndex(),tfNome.getText(),Float.parseFloat(tfContacto.getText()),Integer.parseInt(tfQuantidade.getText()),a,"");
-        pc.gravarProduto(e);
-        
-        carregarTabelaComTodosDadosDaBase();
+       
+       
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -341,21 +371,26 @@ public class Principal extends javax.swing.JFrame {
         if (cbFormacao.getSelectedIndex()==0){
             Novo n = new Novo();
             n.setVisible(true);
-
+            
         }
     }//GEN-LAST:event_cbFormacaoActionPerformed
 
     private void cbFormacaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbFormacaoFocusGained
         // TODO add your handling code here:
-        carregarCombo();
+        
     }//GEN-LAST:event_cbFormacaoFocusGained
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         
-       
+      
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -387,21 +422,20 @@ public class Principal extends javax.swing.JFrame {
         });
     }
     
-    
+   /* 
      void carregarCombo(){
-    
        ProdutoCrud pc = new ProdutoCrud();
         for (int i = 0; i < pc.lerCategoriasParaCombo().size(); i++) {
           cbFormacao.addItem(pc.lerCategoriasParaCombo().get(i));
           
             //System.out.println(pc.lerCategoriasParaCombo().get(i));
         }
-    }
+    }*/
      
      
      
      
-     void carregarTabelaComTodosDadosDaBase(){
+    /* void carregarTabelaComTodosDadosDaBase(){
      ProdutoCrud pc = new ProdutoCrud();
      Estagiario e  = new Estagiario();
      
@@ -417,7 +451,7 @@ public class Principal extends javax.swing.JFrame {
      
      
      
-     }
+     }*/
      
      
      
@@ -446,12 +480,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbFormacao;
     private javax.swing.JComboBox<String> cbMes;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -459,6 +496,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tbProdutos;
     private javax.swing.JTextField tfAano;
     private javax.swing.JTextField tfApelido;

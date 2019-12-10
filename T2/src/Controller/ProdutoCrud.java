@@ -98,7 +98,7 @@ public class ProdutoCrud {
       com  = ConnectionFactory.getConnection();
          ArrayList<Estagiario> produto = new ArrayList<>();
         try {
-            stmt = com.prepareStatement("SELECT e.nome, e.departamento, d.nome, f.nome    FROM estagiario e join  f  on e.formacao = f.id join defartamrnto d on e.departamento = departamento.id ");
+            stmt = com.prepareStatement("SELECT e.nomes, d.nome, f.curso    FROM estagiario e join  formacao f  on e.cod_formacao = f.id_formacao join departamento d on e.cod_departamento = d.id_departamento ");
             rs= stmt.executeQuery();
             
             while (rs.next()) {
@@ -107,9 +107,9 @@ public class ProdutoCrud {
                 //1o construir um objecto do tipo que se pretende ler
                 Estagiario prod = new Estagiario(); 
                 
-                prod.setId_estagiario(rs.getInt("id_estagiario"));
+               // prod.setId_estagiario(rs.getInt("id_estagiario"));
                 prod.setNomes(rs.getString("nomes"));
-                prod.setFormacao(rs.getString("f.nome"));
+                prod.setFormacao(rs.getString("f.curso"));
                 prod.setDepartamento(rs.getString("d.nome"));
                 
              

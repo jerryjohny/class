@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.Dao;
 import Controller.ProdutoCrud;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -176,10 +177,10 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ProdutoCrud pc = new ProdutoCrud();
-        for (int i = 0; i <pc.entrar().size(); i++) {
-         if(tfUser.getText().equalsIgnoreCase(pc.entrar().get(i).getUsuario())&&(tfPass.getText().equalsIgnoreCase(pc.entrar().get(i).getSenha()))){
-             JOptionPane.showMessageDialog(null, "BEM VINDO"+pc.entrar().get(i).getNome());
+        Dao d = new Dao();
+        for (int i = 0; i <d.entrar().size(); i++) {
+         if(tfUser.getText().equalsIgnoreCase(d.entrar().get(i).getUsuario())&&(tfPass.getText().equalsIgnoreCase(d.entrar().get(i).getSenha()))){
+             JOptionPane.showMessageDialog(null, "BEM VINDO"+d.entrar().get(i).getNome());
              Principal p =new Principal();
              p.setVisible(true);
          
