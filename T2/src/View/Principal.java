@@ -5,9 +5,10 @@
  */
 package View;
 
-import Controller.ProdutoCrud;
-import Model.Estagiario;
-import Model.Produto;
+import Controller.Dao;
+
+import Model.Gravadora;
+import Model.Musico;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -45,28 +46,29 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        tfNome = new javax.swing.JTextField();
-        tfContacto = new javax.swing.JTextField();
-        cbFormacao = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbProdutos = new javax.swing.JTable();
+        tfNomeMusico = new javax.swing.JTextField();
+        tfApelidoMusico = new javax.swing.JTextField();
+        cbEstiolos = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         btApagar = new javax.swing.JButton();
         btActualizar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        cbDepartamento = new javax.swing.JComboBox<>();
+        cbMusicos = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        tfApelido = new javax.swing.JTextField();
+        tfNumeroDeMusicas = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        tfAano = new javax.swing.JTextField();
-        cbDia = new javax.swing.JComboBox<>();
-        cbMes = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tfTituloMusica = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        cbGravadoras = new javax.swing.JComboBox<>();
+        tfNomeGravadora = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbProdutos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,32 +84,139 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nomes:");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Formação:");
+        jLabel2.setText("Estilos musicais");
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 51, -1, 31));
 
         jLabel3.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("contacto");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
-        jPanel4.add(tfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 242, 30));
-        jPanel4.add(tfContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 242, 30));
+        jLabel3.setText("Num.Musicas:");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+        jPanel4.add(tfNomeMusico, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 242, 30));
+        jPanel4.add(tfApelidoMusico, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 242, 30));
 
-        cbFormacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Adicionar" }));
-        cbFormacao.addFocusListener(new java.awt.event.FocusAdapter() {
+        cbEstiolos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Kizomba","Hip[ Hop","R&B","Pandza","Marrabenta" }));
+        cbEstiolos.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                cbFormacaoFocusGained(evt);
+                cbEstiolosFocusGained(evt);
             }
         });
-        cbFormacao.addActionListener(new java.awt.event.ActionListener() {
+        cbEstiolos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbFormacaoActionPerformed(evt);
+                cbEstiolosActionPerformed(evt);
             }
         });
-        jPanel4.add(cbFormacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 54, 242, 31));
+        jPanel4.add(cbEstiolos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 242, 31));
+
+        jButton1.setText("gravar musica");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 230, 110, -1));
+
+        btApagar.setText("gravar");
+        btApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btApagarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btApagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 90, -1));
+
+        btActualizar.setText("registar musico");
+        btActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btActualizarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 120, -1));
+
+        jLabel6.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Musicos:");
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 40, 110, 20));
+
+        cbMusicos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
+        jPanel4.add(cbMusicos, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 30, 160, 30));
+
+        jLabel4.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Apelido:");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 90, 20));
+
+        tfNumeroDeMusicas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNumeroDeMusicasActionPerformed(evt);
+            }
+        });
+        jPanel4.add(tfNumeroDeMusicas, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 240, 30));
+
+        jLabel7.setFont(new java.awt.Font("MingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Gravadora:");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 130, 20));
+
+        jLabel5.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Titulo da musica:");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 170, -1));
+
+        tfTituloMusica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfTituloMusicaActionPerformed(evt);
+            }
+        });
+        jPanel4.add(tfTituloMusica, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 130, 240, 30));
+
+        jButton2.setBackground(new java.awt.Color(87, 21, 25));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("sair");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 550, 90, 20));
+
+        jLabel9.setFont(new java.awt.Font("MingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Genero:");
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, 90, 20));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {   }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 180, 140, -1));
+
+        jLabel10.setFont(new java.awt.Font("MingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Nome:");
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 70, 20));
+
+        jLabel12.setFont(new java.awt.Font("MingLiU-ExtB", 0, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Gravadora:");
+        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 130, 20));
+
+        cbGravadoras.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+        cbGravadoras.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cbGravadorasFocusGained(evt);
+            }
+        });
+        jPanel4.add(cbGravadoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, 110, -1));
+        jPanel4.add(tfNomeGravadora, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 150, -1));
+
+        jTabbedPane2.addTab("Registo", jPanel4);
+
+        jTabbedPane1.addTab("Registos", jTabbedPane2);
 
         tbProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -198,112 +307,25 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbProdutos);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 388, 1080, 150));
-
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 210, 90, -1));
-
-        btApagar.setText("Apagar");
-        btApagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btApagarActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btApagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 290, 90, -1));
-
-        btActualizar.setText("Actualizar");
-        jPanel4.add(btActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 250, 90, -1));
-
-        jLabel6.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Departamento:");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 54, 140, 20));
-
-        cbDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Novo+","Tecnologias","estatistica" }));
-        jPanel4.add(cbDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 50, 160, 30));
-
-        jLabel4.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Apelido:");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 214, 90, 20));
-        jPanel4.add(tfApelido, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, 230, 30));
-
-        jLabel7.setFont(new java.awt.Font("MingLiU-ExtB", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Nascimento:");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 160, 20));
-
-        tfAano.setText("Ano");
-        tfAano.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                tfAanoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tfAanoFocusLost(evt);
-            }
-        });
-        jPanel4.add(tfAano, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 250, 50, 30));
-
-        cbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
-        cbDia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDiaActionPerformed(evt);
-            }
-        });
-        jPanel4.add(cbDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 250, 50, 30));
-
-        cbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4","5","6","7","8","9","10","11","12"}));
-        cbMes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbMesActionPerformed(evt);
-            }
-        });
-        jPanel4.add(cbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 250, 50, 30));
-
-        jLabel5.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("jLabel5");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 70, -1));
-
-        jLabel8.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("jLabel8");
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 130, -1));
-
-        jTextField1.setText("jTextField1");
-        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 240, 30));
-
-        jTextField2.setText("jTextField2");
-        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 240, 30));
-
-        jButton2.setBackground(new java.awt.Color(87, 21, 25));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("sair");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 550, 90, 20));
-
-        jTabbedPane2.addTab("Estasgiarios", jPanel4);
-
-        jTabbedPane1.addTab("Registos", jTabbedPane2);
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1145, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 602, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Other1", jPanel3);
@@ -328,62 +350,81 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbMesActionPerformed
-
-    private void cbDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbDiaActionPerformed
-
-    private void tfAanoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfAanoFocusLost
-        // TODO add your handling code here:
-        if (tfAano.getText()==""){
-            tfAano.setText("Ano");
-        }
-    }//GEN-LAST:event_tfAanoFocusLost
-
-    private void tfAanoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfAanoFocusGained
-        // TODO add your handling code here:
-        tfAano.setText("");
-    }//GEN-LAST:event_tfAanoFocusGained
-
     private void btApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btApagarActionPerformed
         // TODO add your handling code here:
+        Dao d = new Dao();
+        Gravadora g = new Gravadora(tfNomeGravadora.getText(),0,"off");
+        d.gravarGravadora(g);
+        
+       cbGravadoras.removeAllItems();
+        for (int i = 0; i < d.listarGravadoras().size(); i++) {
+          cbGravadoras.addItem(d.listarGravadoras().get(i).getNome());
+        } 
+        //add a gravadora a combobox
+        cbGravadoras.addItem(g.getNome());
 
     
     }//GEN-LAST:event_btApagarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String  data1 = tfAano.getText()+"-"+cbMes.getSelectedItem()+"-"+cbDia.getSelectedItem();
-       
-        // Estagiario e  = new Estagiario(tfApelido.getText(),tfNome.getText(),tfContacto.getText(),data1,"Activo",String.valueOf(cbFormacao.getSelectedIndex()),String.valueOf(cbDepartamento.getSelectedIndex()));
-         
-   
-        //Produto p = new Produto(cbCategoria.getSelectedIndex(),tfNome.getText(),Float.parseFloat(tfContacto.getText()),Integer.parseInt(tfQuantidade.getText()),a,"");
-       
-       
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void cbFormacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFormacaoActionPerformed
-        if (cbFormacao.getSelectedIndex()==0){
+    private void cbEstiolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstiolosActionPerformed
+        if (cbEstiolos.getSelectedIndex()==0){
             Novo n = new Novo();
             n.setVisible(true);
             
         }
-    }//GEN-LAST:event_cbFormacaoActionPerformed
+    }//GEN-LAST:event_cbEstiolosActionPerformed
 
-    private void cbFormacaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbFormacaoFocusGained
+    private void cbEstiolosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbEstiolosFocusGained
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_cbFormacaoFocusGained
+    }//GEN-LAST:event_cbEstiolosFocusGained
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tfTituloMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTituloMusicaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfTituloMusicaActionPerformed
+
+    private void cbGravadorasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbGravadorasFocusGained
+        // TODO add your handling code here:
+        
+      
+       
+    }//GEN-LAST:event_cbGravadorasFocusGained
+
+    private void btActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarActionPerformed
+        // TODO add your handling code here:m
+         Dao d = new Dao();
+         Musico m= new Musico(tfNomeMusico.getText(),tfApelidoMusico.getText(),cbEstiolos.getSelectedItem().toString(),Integer.parseInt(tfNumeroDeMusicas.getText()));
+         d.registarMusico(m);
+         
+         
+         cbMusicos.removeAllItems();
+         for (int i = 0; i < d.listarGMusicos().size(); i++) {
+          cbMusicos.addItem(d.listarGMusicos().get(i).getNomes());
+        } 
+         
+    }//GEN-LAST:event_btActualizarActionPerformed
+
+    private void tfNumeroDeMusicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNumeroDeMusicasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNumeroDeMusicasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        // Estagiario e  = new Estagiario(tfApelido.getText(),tfNome.getText(),tfContacto.getText(),data1,"Activo",String.valueOf(cbFormacao.getSelectedIndex()),String.valueOf(cbDepartamento.getSelectedIndex()));
+
+        //Produto p = new Produto(cbCategoria.getSelectedIndex(),tfNome.getText(),Float.parseFloat(tfContacto.getText()),Integer.parseInt(tfQuantidade.getText()),a,"");
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -471,24 +512,27 @@ public class Principal extends javax.swing.JFrame {
         }
        
      }*/
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btActualizar;
     private javax.swing.JButton btApagar;
-    private javax.swing.JComboBox<String> cbDepartamento;
-    private javax.swing.JComboBox<String> cbDia;
-    private javax.swing.JComboBox<String> cbFormacao;
-    private javax.swing.JComboBox<String> cbMes;
+    private javax.swing.JComboBox<String> cbEstiolos;
+    private javax.swing.JComboBox<String> cbGravadoras;
+    private javax.swing.JComboBox<String> cbMusicos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -496,12 +540,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tbProdutos;
-    private javax.swing.JTextField tfAano;
-    private javax.swing.JTextField tfApelido;
-    private javax.swing.JTextField tfContacto;
-    private javax.swing.JTextField tfNome;
+    private javax.swing.JTextField tfApelidoMusico;
+    private javax.swing.JTextField tfNomeGravadora;
+    private javax.swing.JTextField tfNomeMusico;
+    private javax.swing.JTextField tfNumeroDeMusicas;
+    private javax.swing.JTextField tfTituloMusica;
     // End of variables declaration//GEN-END:variables
 }
